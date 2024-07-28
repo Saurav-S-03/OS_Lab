@@ -1,0 +1,46 @@
+//Stage-24 -- Assg-2
+//Takes name of a data file as input and opens the file first.
+//Forks to create child process.
+//The content of the file with shared open instance (shared LSEEK) will be printed to the terminal concurrently by parent and child.
+//A semaphore is used to synchronize the use of the open instance between parent and child.
+
+
+decl
+    int i, semid, pid, data, temp, filedis, a;
+    string filename;
+enddecl
+
+int main()
+{
+begin
+    temp = exposcall("Read",-1,filename);
+    filedis = exposcall("Open", filename);
+    semid = exposcall("Semget");
+
+    pid = exposcall("Fork");
+    a = 0;
+    data = -1;
+    if(pid > 0) then
+        while(a != -2)  do
+            temp = exposcall("SemLock", semid);
+            a = exposcall("Read",filedis,data);
+            temp = exposcall("Write",-2,data);
+            temp = exposcall("SemUnLock", semid);
+        endwhile;
+        
+        temp = exposcall("Semrelease", semid);
+    else
+        while(a != -2)  do
+            temp = exposcall("SemLock", semid);
+            a = exposcall("Read",filedis,data);
+            temp = exposcall("Write",-2,data);
+            temp = exposcall("SemUnLock", semid);
+        endwhile;
+
+        temp = exposcall("Semrelease", semid);
+    endif;
+    
+    return 0;
+end
+}
+

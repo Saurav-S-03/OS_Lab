@@ -1,0 +1,29 @@
+//Works as "ls" in Linux
+//opens ROOT file
+//Iterates through entries
+//Prints names
+int main()
+{
+decl
+	int fdesc;
+	string fname;
+	int data,tmp,x;
+enddecl
+begin
+	fdesc=exposcall("Open","root");
+	x=0;
+	while(x<60)do
+		tmp=exposcall("Read",fdesc,fname);
+		tmp=exposcall("Seek",fd,7);
+		if(fname=="-1")then
+			x=x+1;
+			continue;
+		endif;	
+		tmp=exposcall("Write",-2,fname);
+		
+		x=x+1;
+	endwhile;
+	
+	return 0;
+end
+}

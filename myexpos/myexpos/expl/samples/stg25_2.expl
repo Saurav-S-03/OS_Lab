@@ -1,0 +1,16 @@
+//Stage-25 -- Assg-1
+//Opens a file with given name and permission 
+//File creation, read, write
+int main()
+{
+decl
+    int fdesc, ret, tmp, perm;
+    int flag, i;
+    str fname;
+enddecl
+begin
+    flag=0;
+    tmp = exposcall("Write",-2,"File name:");
+    tmp = exposcall("Read",-1,fname);
+    tmp = exposcall("Write",-2,"(0-:");
+    tmp = exposcall("Read",-1,perm);

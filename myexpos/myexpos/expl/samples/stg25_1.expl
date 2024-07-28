@@ -1,0 +1,65 @@
+//Stage-25 -- Assg-1
+//creates a file with given name and permission 
+//File creation, read, write
+int main()
+{
+decl
+    int fdesc, ret, tmp, perm;
+    int flag, i;
+    str fname;
+enddecl
+begin
+    flag=0;
+    tmp = exposcall("Write",-2,"File name:");
+    tmp = exposcall("Read",-1,fname);
+    tmp = exposcall("Write",-2,"(0-Excl|1-Open):");
+    tmp = exposcall("Read",-1,perm);
+    
+    while(flag != 1) do
+        ret = exposcall("Create",fname,perm);
+        if(ret == -1) then
+            tmp = exposcall("Write",-2,"Creation Error.!");
+            break;
+        endif;
+        
+        fdesc = exposcall("Open",fname);
+        if(fdesc < 0) then
+            tmp = exposcall("Write",-2,"Open Error..!!");
+            tmp = exposcall("Write",-2,fdesc);
+            break;
+        endif;
+        
+        i = 1;
+        while((i<=1100) AND (flag==0)) do
+            ret = exposcall("Write",fdesc,i);
+            if(ret != 0) then
+                tmp = exposcall("Write",-2,"Write Error..!!");
+                tmp = exposcall("Write",-2,ret);
+                flag = 1;
+            endif; 
+            
+            i = i + 1;
+        endwhile;
+        ret = exposcall("Write",fdesc," ");
+        //Takes to the end of file
+        ret = exposcall("Seek",fdesc,-1);
+        if(ret != 0) then
+            tmp = exposcall("Write",-2,"Seek Error..!!");
+            tmp = exposcall("Write",-2,ret);
+            break;
+        endif;
+        
+        tmp = exposcall("Read",fdesc,i);
+        while((tmp == 0) AND (ret == 0)) do
+            tmp = exposcall("Write",-2,i);
+            ret = exposcall("Seek",fdesc,-2);
+            tmp = exposcall("Read",fdesc,i);
+        endwhile;
+        i = exposcall("Write",-2,"Done");
+        i = exposcall("Write",-2,ret);
+        i = exposcall("Write",-2,tmp);
+    flag = 1;
+    endwhile;
+    return 0;
+end
+}

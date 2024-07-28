@@ -1,0 +1,49 @@
+//Stage-27 -- Assg-3
+//Code was given in Roadmap
+int main()
+{
+decl
+    int temp, fd, permission, iter, pid;
+    string filename;
+enddecl
+
+begin
+    filename="num.dat";
+    permission=1;
+    temp=exposcall("Create",filename,permission);
+    if(temp >= 0) then
+        write("Created");
+    endif;
+    fd=exposcall("Open",filename);
+    if(fd>=0) then
+        write("Writing...");
+        iter=1;
+        while(iter<=1200) do
+            temp=exposcall("Write",fd, iter);
+            iter=iter+1;
+        endwhile;    
+        temp=exposcall("Close",fd);
+        if(temp >= 0) then
+            write("Closed");
+        else
+            write("Not Closed");
+        endif;
+        
+        pid=exposcall("Fork");
+        //write("Fork-1");
+        pid=exposcall("Fork");
+        //write("Fork-2");
+        pid=exposcall("Fork");
+        //write("Fork-3");
+        pid=exposcall("Fork");
+        //write("Fork-4");
+        
+        temp = exposcall("Exec","pgm1.xsm");
+    else
+        temp=exposcall("Write",-2, "OPEN FAIL");
+    endif;
+          
+    return 0;
+end
+}
+

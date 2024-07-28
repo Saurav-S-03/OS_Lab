@@ -1,0 +1,32 @@
+//A user program that Forks 3 times back-to-back ; then Execs pid.xsm
+int main()
+{
+decl
+    int pid,tmp;
+enddecl
+begin
+    //1st time Fork
+    pid = exposcall("Fork");
+    while(pid == -1) do
+        pid = exposcall("Fork");
+    endwhile;
+    
+    //2nd time Fork
+    pid = exposcall("Fork");
+    while(pid == -1) do
+        pid = exposcall("Fork");
+    endwhile;
+    
+    //3rd time Fork
+    pid = exposcall("Fork");
+    while(pid == -1) do
+        pid = exposcall("Fork");
+    endwhile;
+    
+    //Continous loops to ensure occurence of Fork
+    
+    tmp = exposcall("Exec","pid.xsm");
+    
+    return 0;
+end
+}

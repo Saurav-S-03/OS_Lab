@@ -1,0 +1,36 @@
+//LOGIN expl code
+//infinite continous loop
+//Ret == -1 => Invalid UserName || Password
+//Ret == -2 => Not INIT/LOGIN process requesting login
+int main()
+{
+decl
+    int ret;
+    str username, password; 
+enddecl
+begin
+    while(1 == 1) do
+        write(" ");
+        ret = exposcall("Write",-2,"User-Name:");
+        ret = exposcall("Read",-1,username);
+        ret = exposcall("Write",-2,"Password:");
+        ret = exposcall("Read",-1,password);
+        
+        ret = exposcall("Login",username,password);
+        
+        if(ret == -1) then
+            write("Invalid");
+            write("ID/Pass!");
+            continue;
+        endif;
+        
+        if(ret == -2) then
+            write("Access");
+            write("Denied!");
+            continue;
+        endif;
+    endwhile;
+    return 0;
+end
+}
+

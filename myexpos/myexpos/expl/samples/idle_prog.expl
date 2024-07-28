@@ -1,0 +1,15 @@
+int main()
+{
+	decl
+		int tmp;
+		string name;
+	enddecl
+	begin
+	    name = "eXpOS";
+		while(1==1) do
+			tmp = exposcall("Write", -2,name);
+		endwhile;
+		return 0;
+	end
+}
+

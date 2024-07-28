@@ -1,0 +1,12 @@
+//A user program that just finds out the PID of the process
+int main()
+{
+decl
+    int pid;
+enddecl
+begin
+    pid = exposcall("Getpid");
+    write(pid);
+    return 0;
+end
+}

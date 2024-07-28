@@ -1,0 +1,30 @@
+//Similar to cat in Linux
+int main()
+{
+    decl
+        int temp, filedesc;
+        str word, filename;
+    enddecl
+
+    begin
+        temp = exposcall("Write",-2,"Filename:");
+        read(filename);
+
+        filedesc = exposcall("Open", filename);
+
+        while(1 == 1) do
+            
+            temp = exposcall("Read",filedesc,word);
+
+            if(temp != 0) then
+                break;
+            endif;
+
+            write(word);
+        endwhile;
+
+        temp = exposcall("Close", filedesc);
+
+        return 0;
+    end
+}

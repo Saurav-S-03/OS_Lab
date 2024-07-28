@@ -1,0 +1,65 @@
+//Linked List Program -- Stage-19 Assg_1
+type
+    node
+    {
+        int val;
+        node next;
+    }
+endtype
+
+decl
+    node head;
+enddecl
+
+int main()
+{
+decl
+    int N,tmp,i;
+    node x,nx;
+enddecl
+
+begin
+    write("Enter N:");
+    read(N);
+    
+    if(N <= 0) then
+        write("Invalid N!");
+        write("Exiting..!!");
+    else
+    
+        tmp = initialize();
+        
+        write("Enter List:");
+        read(tmp);
+        x = alloc();
+        x.val = tmp;
+        x.next = null;
+        
+        head = x;
+        i=1;
+        while(i < N) do
+            read(tmp);
+            nx = alloc();
+            nx.val = tmp;
+            nx.next = null;
+            
+            x.next = nx;
+            x = nx;
+            i = i+1;
+        endwhile;
+        
+        x = head;
+        write("Linked List:");
+        i=0;
+        while(i < N) do
+            tmp = x.val;
+            write(tmp);
+            x = x.next;
+            
+            i = i+1;
+        endwhile;
+    endif;
+    return 0;
+end
+}
+

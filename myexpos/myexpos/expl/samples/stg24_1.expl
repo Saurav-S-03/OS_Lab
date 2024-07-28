@@ -1,0 +1,34 @@
+//Stage-24 -- Assg-1
+//Take file name as input from the console
+//Read the contents of the file and 
+//Print to the console.
+int main(){
+decl
+	str fileName;
+	int tmp, ret, x, fileDesc;
+enddecl
+
+begin
+	ret = exposcall("Write",-2,"File-Name:");
+	ret = exposcall("Read", -1, fileName);
+
+    fileDesc = exposcall("Open", fileName);
+	
+    //ret = exposcall("Write", -2, "Descriptor:");
+    //ret = exposcall("Write", -2, fileDesc);
+
+	ret = 0;
+	while(ret == 0) do
+		ret = exposcall("Read", fileDesc, x);
+		//tmp = exposcall("Write",-2,ret);
+		if((ret == -2) OR (ret == -1)) then
+			break;
+		endif;
+		tmp = exposcall("Write",-2,x);
+	endwhile;
+    ret = exposcall("Close", fileDesc);
+    //tmp = exposcall("Write",-2,"Closed:");
+    //tmp = exposcall("Write",-2,ret);
+return 0;
+end
+}

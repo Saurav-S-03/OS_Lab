@@ -1,0 +1,18 @@
+//Stage-23 Assg-1
+int main()
+{
+decl
+    int tmp;
+    string name;
+enddecl
+begin
+    write("Enter Name:");
+    read(name);
+    
+    tmp = exposcall("Create",name,1);
+    write("Created");
+    write(tmp);
+    
+    return 0;
+end
+}
